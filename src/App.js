@@ -2,15 +2,32 @@ import "./App.css";
 import { useState } from 'react';
 
 export const App = () => {
+  const [ todos, setTodos ] = useState(
+    [
+     { id : 1,
+       title : "test",
+       status: "未着手" 
+     },
+     { id: 2,
+       title : "test2",
+       status: "着手" 
+     },
+     { id: 3,
+       title : "test3",
+       status: "完了" 
+     },
+   ])
+
   const [todoTitle, setTodoTitle] = useState("")
-  const [todoId, setTodoId] = useState(1)
+  const [todoId, setTodoId] = useState(todos.length + 1)
 
 
   const handleSetTodoTitle = e => {
     setTodoTitle(e.target.value)
   }
 
-
+  //targettodoという引数、この引数が出来ている
+  //
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => todo.id !== targetTodo.id));
   };
@@ -24,22 +41,8 @@ export const App = () => {
     resetTodoTitle()
    }
 
-  const [ todos, setTodos ] = useState(
-    [
-     {
-       title : "test",
-       status: "未着手" 
-     },
-     {
-       title : "test2",
-       status: "着手" 
-     },
-     {
-       title : "test3",
-       status: "完了" 
-     },
-   ]
- )
+ //id確認用
+ //console.log('todolist',todos);
 
   return (
     <>
@@ -52,8 +55,6 @@ export const App = () => {
           <button>削除</button>
         </li>
       </ul>
-    
-
       <input
         type="text"
         label="タイトル"
@@ -61,12 +62,10 @@ export const App = () => {
         onChange={handleSetTodoTitle}
       />
       <button onClick={()=>handleAddTodo()}>作成</button>
-          
-
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <span>{todo.title}</span>
+            <span style={{marginRight: 10}}>{todo.title}</span>
             <select value={todo.status}>
               <option value='notStarted'>未着手</option>
               <option value='inProgress'>作業中</option>
@@ -77,7 +76,6 @@ export const App = () => {
           </li>
         ))}
       </ul> 
-    
     </div>
     </>
   );
