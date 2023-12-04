@@ -5,15 +5,15 @@ export const App = () => {
   const [todoTitle, setTodoTitle] = useState("")
   const [todoId, setTodoId] = useState(1)
 
+
   const handleSetTodoTitle = e => {
     setTodoTitle(e.target.value)
   }
 
+
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => todo.id !== targetTodo.id));
   };
-
-
 
 
   const resetTodoTitle = () => { setTodoTitle("") }
@@ -23,13 +23,6 @@ export const App = () => {
     setTodoId(todoId + 1)
     resetTodoTitle()
    }
-
-  const filterOptions = [
-    { value: 'all', label: 'すべて' },
-    { value: 'notStarted', label: '未着手' },
-    { value: 'inProgress', label: '作業中' },
-    { value: 'done', label: '完了' },
-  ];
 
   const [ todos, setTodos ] = useState(
     [
@@ -69,26 +62,7 @@ export const App = () => {
       />
       <button onClick={()=>handleAddTodo()}>作成</button>
           
-          
-      <button onClick={() => handleDeleteTodo(todos)}>削除</button>
 
-      {/* <input
-        type='text'
-        label='新しいタイトル'
-        // value={newTitle}
-        // onChange={handleEditFormChanges}
-      /> */}
-      {/* <button onClick={()=>handleEditTodo}>編集を保存</button>
-      <button onClick={()=>handleCloseEditForm}>キャンセル</button> */}
-
-      <select>
-          {filterOptions.map(({ value, label }) => (
-            <option value={value}>{label}</option>
-          ))}
-        </select>
-
-       
- 	
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
@@ -99,7 +73,7 @@ export const App = () => {
               <option value='done'>完了</option>
             </select>
             <button>編集</button>
-            <button>削除</button>
+            <button onClick={() => handleDeleteTodo(todo)}>削除</button>
           </li>
         ))}
       </ul> 
